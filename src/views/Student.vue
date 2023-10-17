@@ -20,7 +20,7 @@
                             </ion-card-header>
                             <ion-card-content>
                                 <ion-list>
-                                <template v-for="(estudiante, i) in respuesta" :key="i" ></template>
+                                <template v-for="(estudiante, i) in respuesta" :key="i" >
                                     <ion-item-sliding>
                                     <ion-item :button="true">
                                         <ion-icon slot="start" :icon="personCircle"></ion-icon>
@@ -40,7 +40,7 @@
                                         </ion-item-option>
                                         </ion-item-options>
                                         </ion-item-sliding>
-                                        
+                                </template>
                                         <!-- Se mostrará cuando no hayan estudiantes en la tabla -->
                                             <ion-item v-if="respuesta.length==0">
                                             <ion-icon slot="start" :icon="closeCircle"></ion-icon>
