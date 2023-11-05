@@ -1,8 +1,9 @@
 <template>
     <ion-page>
+        <ToolBar title="Nuevo estudiante"></ToolBar>
         <ion-header>
-            <ion-toolbar>
-                <ion-title>Estudiantes</ion-title>
+            <ion-toolbar >
+                
             </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
@@ -82,6 +83,7 @@ import {IonPage, IonContent, IonGrid, IonRow, IonCol, IonIcon,
     IonHeader, IonToolbar, IonTitle, IonButton, IonInput,IonToast
 } from '@ionic/vue'
 import axios from 'axios'
+import ToolBar from '@/components/ToolBar.vue'
 
 export default {
     name: 'AddStudent',
@@ -96,13 +98,26 @@ export default {
             // Variable para controlar la visibilidad del toast
             toastState: false,
             // Variable para guardar el mensaje a mostrar en el toast
-            toastMessage: null
+            toastMessage: null,
+            // Variable para definir el header de autorización
+            config: { }
             }
         },
         methods: {
+            ionViewWillEnter() {
+                this.getToken()
+            },
+            async getToken(){
+                let token = await this.$storage.get('token')
+                this.config = {
+                    headers: {
+                        'Authorization': 'Bearer '+ token
+                    }
+                }
+            },
             addStudent(){
             // Petición para insertar datos
-            axios.post('http://127.0.0.1:8000/api/estudiante/store', this.estudiante)
+            axios.post('http://127.0.0.1:8000/api/estudiante/store', this.estudiante, this.config)
                 .then(response => {
             let res = response.data
                 this.estudiante = {}

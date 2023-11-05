@@ -1,5 +1,6 @@
 <template>
     <ion-page>
+        <ToolBar title="Estudiantes"></ToolBar>
         <ion-header>
             <ion-toolbar>
                 <ion-title>Estudiantes</ion-title>
@@ -197,6 +198,7 @@ import {
 } from '@ionic/vue'
 
 import axios from 'axios'
+import ToolBar from '@/components/ToolBar.vue'
 
 export default {
     name: 'Student',
@@ -221,14 +223,24 @@ export default {
             // Variable para controlar la visibilidad del toast
             toastState: false,
             // Variable para guardar el mensaje a mostrar en el toast
-            toastMessage: null
+            toastMessage: null,
+            // Variable para definir el header de autorización
+            config: { }
             }
         },
         methods: {
+            
+            async getToken(){
+                let token = await this.$storage.get('token')
+                this.config = {
+                    headers: {'Authorization': 'Bearer '+ token
+                    }
+                }
+            },
             // Petición para consultar datos
             loadData(){
                 this.respuesta = []
-                axios.get('http://127.0.0.1:8000/api/estudiante/select')
+                axios.get('http://127.0.0.1:8000/api/estudiante/select',this.config)
                     .then(response => {
                     let res = response.data
                     if(res.code==200){
@@ -240,7 +252,7 @@ export default {
             // Función para mostrar información de un estudiante
             showStudent(id, action) {
             // Realiza una solicitud GET a la API para obtener los datos del estudiante
-                axios.get(`http://127.0.0.1:8000/api/estudiante/find/${id}`)
+                axios.get(`http://127.0.0.1:8000/api/estudiante/find/${id}`, this.config)
                     .then(response => {
                     let res = response.data;
                     // Comprueba si la respuesta tiene un código 200 (éxito)
@@ -264,7 +276,7 @@ export default {
         // Petición para actualizar los datos del estudiante
         editStudent(id) {
         // Realiza una solicitud PUT para actualizar los datos del estudiante
-            axios.put(`http://127.0.0.1:8000/api/estudiante/update/${id}`, this.estudiante)
+            axios.put(`http://127.0.0.1:8000/api/estudiante/update/${id}`, this.estudiante, this.config)
                 .then(response => {
                 let res = response.data;
                 // Comprueba si la respuesta tiene un código 200 (éxito)
@@ -288,7 +300,7 @@ export default {
          // Petición para eliminar datos de un estudiante
         deleteStudent(id) {
             // Realiza una solicitud DELETE para eliminar los datos del estudiante
-            axios.delete(`http://127.0.0.1:8000/api/estudiante/delete/${id}`)
+            axios.delete(`http://127.0.0.1:8000/api/estudiante/delete/${id}`,this.config)
                 .then(response => {
                 let res = response.data;
                 // Comprueba si la respuesta tiene un código 200 (éxito)
@@ -310,6 +322,7 @@ export default {
         // Se ejecuta cuando el componente está a punto de mostrarse
             ionViewWillEnter(){
         this.loadData()
+        this.getToken()
     }
 }
 </script>
