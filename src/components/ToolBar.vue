@@ -3,9 +3,9 @@
       <ion-toolbar>
         <ion-title>{{ title }}</ion-title>
         <ion-buttons slot="end">
-          <ion-button @click="logout" icon="logOutOutline">
+          <ion-icon @click="logout" :icon="logOutOutline">
             Cerrar
-          </ion-button>
+          </ion-icon>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>

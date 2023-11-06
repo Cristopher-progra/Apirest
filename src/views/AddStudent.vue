@@ -1,11 +1,6 @@
 <template>
     <ion-page>
         <ToolBar title="Nuevo estudiante"></ToolBar>
-        <ion-header>
-            <ion-toolbar >
-                
-            </ion-toolbar>
-        </ion-header>
         <ion-content class="ion-padding">
             <ion-grid>
                 <ion-row>
@@ -89,7 +84,7 @@ export default {
     name: 'AddStudent',
     components: {
     IonPage, IonContent, IonGrid, IonRow, IonCol, IonIcon,
-    IonHeader, IonToolbar, IonTitle, IonButton, IonInput,IonToast
+    IonHeader, IonToolbar, IonTitle, IonButton, IonInput,IonToast,ToolBar
     },
     data(){
         return {

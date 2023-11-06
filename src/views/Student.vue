@@ -1,11 +1,6 @@
 <template>
     <ion-page>
         <ToolBar title="Estudiantes"></ToolBar>
-        <ion-header>
-            <ion-toolbar>
-                <ion-title>Estudiantes</ion-title>
-            </ion-toolbar>
-        </ion-header>
         <ion-content class="ion-padding">
             <ion-grid>
                 <ion-row>
@@ -206,7 +201,7 @@ export default {
     IonPage, IonContent, IonGrid, IonRow, IonCol, IonList, IonItem, IonIcon,
     IonLabel, IonHeader, IonToolbar, IonTitle, IonCard, IonCardContent,
     IonCardHeader, IonCardTitle, IonCardSubtitle, IonInput, IonItemSliding,
-    IonItemOption, IonItemOptions,IonModal,IonButtons,IonButton,IonToast
+    IonItemOption, IonItemOptions,IonModal,IonButtons,IonButton,IonToast,ToolBar
     },
     data() {
         return {
